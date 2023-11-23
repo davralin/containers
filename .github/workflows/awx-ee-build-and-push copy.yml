@@ -29,9 +29,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: adb-fastboot/
+          context: awx-ee/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            davralin/adb-fastboot:latest
-            ghcr.io/davralin/adb-fastboot:latest
+            davralin/awx-ee:latest
+            ghcr.io/davralin/awx-ee:latest
