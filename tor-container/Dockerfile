@@ -1,5 +1,5 @@
 FROM debian:stable-20231030-slim
-
+LABEL MAINTAINER davralin
 LABEL Description="A container to contain tor"
 
 RUN apt-get update \
