@@ -1,5 +1,6 @@
 FROM debian:stable-20231030-slim
 LABEL MAINTAINER davralin
+LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
 RUN \
   /usr/bin/apt-get -y update && \
