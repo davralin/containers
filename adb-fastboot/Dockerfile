@@ -8,6 +8,7 @@ RUN \
     adb \
     fastboot \
     heimdall-flash \
+    wget \
     && \
     /bin/rm -rf /var/lib/apt/lists/*
 
