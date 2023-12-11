@@ -1,4 +1,4 @@
-name: ci
+name: awx-ee
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: ci
+name: sleep
 
 on:
   push:
