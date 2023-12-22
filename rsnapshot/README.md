@@ -1,3 +1,0 @@
-# rsnapshot
-
-rsnapshot - container
