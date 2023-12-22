@@ -1,4 +1,4 @@
-FROM debian:stable-20231030-slim
+FROM debian:stable-20231218-slim
 LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
