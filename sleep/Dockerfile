@@ -14,6 +14,7 @@ RUN \
     silversearcher-ag \
     sqlite3 \
     tar \
+    tmux \
     unzip \
     vim \
     && \
