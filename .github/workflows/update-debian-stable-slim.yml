@@ -1,0 +1,26 @@
+name: update-debian-stable-slim
+
+on:
+  workflow_dispatch:
+  schedule:
+   - cron: '15 05 * * *'
+
+jobs:
+  update-debian-stable-slim:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Start the updater
+        run: bash meta/update-debian-stable-slim.sh
+
+      - name: Auto-commit changes and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(debian-stable-slim): Ensure we are running latest debian:stable-slim"
+          commit_author: Feed Updater <actions@github.com>
+          repository: ./
