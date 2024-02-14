@@ -1,4 +1,4 @@
-FROM quay.io/ansible/awx-ee:23.7.0
+FROM quay.io/ansible/awx-ee:23.8.0
 LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
