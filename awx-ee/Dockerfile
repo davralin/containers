@@ -5,4 +5,6 @@ LABEL org.opencontainers.image.source https://github.com/davralin/containers
 USER root
 RUN ansible-galaxy collection install community.general
 
+RUN pip install mitogen --no-input
+
 USER 1000
