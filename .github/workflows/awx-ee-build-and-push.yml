@@ -37,4 +37,3 @@ jobs:
             davralin/awx-ee:awx
             ghcr.io/davralin/awx-ee:latest
             ghcr.io/davralin/awx-ee:awx
-            ghcr.io/davralin/awx-ee:mitogen
