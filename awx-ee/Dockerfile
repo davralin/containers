@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.source https://github.com/davralin/containers
 USER root
 RUN ansible-galaxy collection install community.general
 RUN ansible-galaxy collection install awx.awx
+RUN ansible-galaxy collection install pfsensible.core
 
 RUN pip install mitogen --no-input
 
