@@ -3,9 +3,9 @@ LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
 USER root
-RUN ansible-galaxy collection install community.general
-RUN ansible-galaxy collection install awx.awx
-RUN ansible-galaxy collection install pfsensible.core
+RUN ansible-galaxy collection install community.general -p /usr/share/ansible/collections
+RUN ansible-galaxy collection install awx.awx -p /usr/share/ansible/collections
+RUN ansible-galaxy collection install pfsensible.core -p /usr/share/ansible/collections
 
 RUN pip install mitogen --no-input
 
