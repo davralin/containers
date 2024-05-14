@@ -1,4 +1,4 @@
-FROM debian:stable-20240423-slim
+FROM debian:stable-20240513-slim
 LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 LABEL Description="A container to contain tor"
