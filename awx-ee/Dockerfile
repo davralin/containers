@@ -3,6 +3,9 @@ LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
 USER root
+RUN apt update && apt install -y \
+  jq	\
+  rsync
 RUN ansible-galaxy collection install community.general -p /usr/share/ansible/collections
 RUN ansible-galaxy collection install awx.awx -p /usr/share/ansible/collections
 
