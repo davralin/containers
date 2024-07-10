@@ -1,4 +1,4 @@
-name: nginx-autoindex
+name: go-away
 
 on:
   push:
@@ -29,9 +29,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: nginx-autoindex/
+          context: go-away-container/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            davralin/go-away-container:latest
-            ghcr.io/davralin/go-away-container:latest
+            davralin/go-away:latest
+            ghcr.io/davralin/go-away:latest
