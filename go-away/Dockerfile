@@ -1,4 +1,4 @@
-FROM nginx:1.27.1-alpine-slim
+FROM nginx:1.27.2-alpine-slim
 LABEL MAINTAINER davralin
 LABEL org.opencontainers.image.source https://github.com/davralin/containers
 
