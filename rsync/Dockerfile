@@ -10,4 +10,4 @@ RUN \
     && \
     /bin/rm -rf /var/lib/apt/lists/*
 
-USER 1000
+USER nobody:nogroup
