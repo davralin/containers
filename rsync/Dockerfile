@@ -9,3 +9,5 @@ RUN \
     rsync \
     && \
     /bin/rm -rf /var/lib/apt/lists/*
+
+USER 1000
