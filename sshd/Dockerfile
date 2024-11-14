@@ -9,17 +9,19 @@ RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
     openssh-server \
-    rsync \
+    openssh-sftp-server \
     && \
-    /bin/rm -rf /etc/ssh/*.key \
-    /bin/rm -rf /etc/ssh/*.pub \
-    /bin/rm -rf /var/lib/apt/lists/*
+    /bin/rm -rf /etc/ssh/*.key && \
+    /bin/rm -rf /etc/ssh/*.pub && \
+    /bin/rm -rf /var/lib/apt/lists/* && \
+    /usr/bin/sed 's|#HostKey /etc/ssh/ssh_host_ed25519_key|HostKey /home/user/ssh/ssh_host_ed25519_key|g' -i /etc/ssh/sshd_config && \
+    /usr/bin/sed 's|#AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile	ssh/authorized_keys|g' -i /etc/ssh/sshd_config
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN /bin/echo "HostKey /home/user/ssh_host_ed25519_key" >> /etc/ssh/sshd_config
-
 USER user:group
+
+RUN /usr/bin/mkdir -p /home/user/ssh
 
 EXPOSE 2222
 
