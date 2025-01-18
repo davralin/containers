@@ -6,6 +6,7 @@ RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
     coreutils \
+    file \
     git-core \
     less \
     nano \
@@ -17,6 +18,7 @@ RUN \
     tmux \
     unzip \
     vim \
+    wget \
     && \
     /bin/rm -rf /var/lib/apt/lists/* \
     /bin/echo 'alias ll="ls -l"' >> /etc/profile
