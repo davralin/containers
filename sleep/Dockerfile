@@ -21,7 +21,7 @@ RUN \
     wget \
     && \
     /bin/rm -rf /var/lib/apt/lists/* \
-    /bin/echo 'alias ll="ls -l"' >> /etc/profile
+    /bin/echo 'alias ll="ls -l"' >> /root/.bashrc
 
 ENTRYPOINT    ["sh", "-c"]
 CMD           ["trap : TERM INT; sleep infinity & wait"]
