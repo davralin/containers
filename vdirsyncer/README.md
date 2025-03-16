@@ -2,4 +2,6 @@
 
 vdirsyncer - container
 
-I don't use this, sooooo fork and maintain it yourself if you need changes.
+## DEPRECATED
+
+I am going to remove this soon
