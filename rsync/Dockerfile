@@ -13,5 +13,6 @@ RUN \
     && \
     /bin/rm -rf /var/lib/apt/lists/*
 
-
 USER user:group
+
+RUN mkdir /home/user/.ssh
