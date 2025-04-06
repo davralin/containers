@@ -9,6 +9,4 @@ RUN dnf install -y \
 RUN ansible-galaxy collection install community.general -p /usr/share/ansible/collections
 RUN ansible-galaxy collection install awx.awx -p /usr/share/ansible/collections
 
-RUN pip install mitogen --no-input
-
 USER 1000
