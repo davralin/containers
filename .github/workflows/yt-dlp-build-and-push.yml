@@ -1,4 +1,4 @@
-name: youtube-dl
+name: yt-dlp
 
 on:
   push:
@@ -29,9 +29,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: youtube-dl/
+          context: yt-dlp/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            davralin/youtube-dl:latest
-            ghcr.io/davralin/youtube-dl:latest
+            davralin/yt-dlp:latest
+            ghcr.io/davralin/yt-dlp:latest
