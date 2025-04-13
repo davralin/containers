@@ -21,8 +21,6 @@ RUN \
     && \
     /bin/rm -rf /var/lib/apt/lists/* && \
     /bin/mkdir -p /output && \
-    /usr/bin/curl -L --create-dirs --output /usr/local/bin/youtube-dl "https://yt-dl.org/downloads/latest/youtube-dl" && \
-    /bin/chmod 0755 /usr/local/bin/youtube-dl && \
     /usr/bin/curl -L --create-dirs --output /usr/local/bin/yt-dlp "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp" && \
     /bin/chmod 0755 /usr/local/bin/yt-dlp
 
