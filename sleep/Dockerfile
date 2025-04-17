@@ -7,10 +7,12 @@ RUN \
   /usr/bin/apt-get -y install --no-install-recommends \
     ca-certificates \
     coreutils \
+    curl \
     file \
     git-core \
     less \
     nano \
+    nmap \
     procps \
     rsync \
     silversearcher-ag \

@@ -1,6 +1,7 @@
 # sleep-container
 
-A simple container, meant for continous staying awake (by sleeping) - perfect for just having a shell with editing tools.
+A container, meant for continous staying awake (by sleeping).
+Perfect for just having a shell with editing tools, for debugging.
 
 Credits for the idea goes to wardsco/sleep
 <https://hub.docker.com/r/wardsco/sleep/>
