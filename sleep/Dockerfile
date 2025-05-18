@@ -8,6 +8,7 @@ RUN \
     ca-certificates \
     coreutils \
     curl \
+    ffmpeg \
     file \
     git-core \
     less \
