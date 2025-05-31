@@ -6,6 +6,7 @@ RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
     ca-certificates \
+    calibre \
     coreutils \
     curl \
     ffmpeg \
