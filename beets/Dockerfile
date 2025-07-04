@@ -11,11 +11,14 @@ RUN \
     ffmpeg \
     python3-dev \
     python3-pip \
-    tmux # Nice to detach the container
+    tmux \
+    vim
+
+# I use tmux to run longer jobs in k8s on unstable laptop-connections
 
 RUN \
   /usr/bin/pip install --break-system-packages \
-  "beets[badfiles,embedart,fetchart,FtInTitle,inline,lastgenre,scrub]"
+  "beets[badfiles,embedart,fetchart,ftintitle,inline,lastgenre,scrub]"
 
 USER 1000
 
