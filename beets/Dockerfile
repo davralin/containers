@@ -19,3 +19,5 @@ RUN \
 
 USER 1000
 
+ENTRYPOINT    ["sh", "-c"]
+CMD           ["trap : TERM INT; sleep infinity & wait"]
