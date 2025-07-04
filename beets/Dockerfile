@@ -9,6 +9,7 @@ RUN \
     git \
     git-lfs \
     ffmpeg \
+    imagemagick \
     python3-dev \
     python3-pip \
     tmux \
