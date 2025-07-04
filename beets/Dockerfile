@@ -8,12 +8,14 @@ RUN \
     ca-certificates \
     git \
     git-lfs \
+    ffmpeg \
+    python3-dev \
     python3-pip \
     tmux # Nice to detach the container
 
 RUN \
   /usr/bin/pip install --break-system-packages \
-  "beets[badfiles,embedart,fetchart,FtInTitle,inline,lastgenre,replaygain,scrub]"
+  "beets[badfiles,embedart,fetchart,FtInTitle,inline,lastgenre,scrub]"
 
 USER 1000
 
