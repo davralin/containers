@@ -10,6 +10,7 @@ RUN \
     coreutils \
     curl \
     ffmpeg \
+    flac \
     file \
     git-core \
     less \
