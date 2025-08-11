@@ -19,7 +19,7 @@ RUN \
 
 RUN \
   /usr/bin/pip install --break-system-packages \
-  "beets[badfiles,embedart,fetchart,ftintitle,inline,lastgenre,scrub]"
+  "beets[badfiles,embedart,fetchart,ftintitle,inline,lastgenre,scrub,discogs]"
 
 USER 1000
 
