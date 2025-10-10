@@ -7,7 +7,10 @@ RUN dnf install -y \
   jq	\
   rsync
 
-RUN ansible-galaxy collection install awx.awx -p /usr/share/ansible/collections \
-    ansible-galaxy collection install community.general -p /usr/share/ansible/collections
+RUN ansible-galaxy collection install \
+    ansibleguy.opnsense \
+    awx.awx \
+    community.general \
+    community.windows
 
 USER 1000
