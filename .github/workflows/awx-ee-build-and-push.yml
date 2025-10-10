@@ -34,7 +34,4 @@ jobs:
           push: true
           tags: |
             davralin/awx-ee:latest
-            davralin/awx-ee:awx
             ghcr.io/davralin/awx-ee:latest
-            ghcr.io/davralin/awx-ee:awx
-            ghcr.io/davralin/awx-ee:test
