@@ -5,11 +5,13 @@ LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 USER root
 RUN dnf install -y \
   jq	\
-  rsync
+  rsync \
+  python-ldap
 
 RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
     ansibleguy.opnsense \
     awx.awx \
+    community.crypto \
     community.general \
     community.windows
 
