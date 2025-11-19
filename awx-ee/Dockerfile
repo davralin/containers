@@ -11,6 +11,7 @@ RUN dnf install -y \
 RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
     ansibleguy.opnsense \
     awx.awx \
+    ansible.posix \
     community.crypto \
     community.general \
     community.windows
