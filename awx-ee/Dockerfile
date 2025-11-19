@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 USER root
 RUN dnf install -y \
   jq	\
+  rhel-system-roles \
   rsync \
   python-ldap
 
