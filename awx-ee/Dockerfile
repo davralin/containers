@@ -15,6 +15,7 @@ RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
     ansible.posix \
     community.crypto \
     community.general \
-    community.windows
+    community.windows \
+    containers.podman
 
 USER 1000
