@@ -30,5 +30,7 @@ RUN \
     /bin/rm -rf /var/lib/apt/lists/* \
     /bin/echo 'alias ll="ls -l"' >> /root/.bashrc
 
+ADD sleeper.sh /usr/local/bin/sleeper
+
 ENTRYPOINT    ["sh", "-c"]
 CMD           ["trap : TERM INT; sleep infinity & wait"]
