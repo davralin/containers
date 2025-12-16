@@ -9,6 +9,7 @@ RUN \
     calibre \
     coreutils \
     curl \
+    e2fsprogs \
     ffmpeg \
     flac \
     file \
