@@ -13,7 +13,8 @@ RUN \
     python3-dev \
     python3-pip \
     tmux \
-    vim
+    vim && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 # I use tmux to run longer jobs in k8s on unstable laptop-connections
 

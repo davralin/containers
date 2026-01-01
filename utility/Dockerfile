@@ -26,10 +26,8 @@ RUN \
     tmux \
     unzip \
     vim \
-    wget \
-    && \
-    /bin/rm -rf /var/lib/apt/lists/* \
-    /bin/echo 'alias ll="ls -l"' >> /root/.bashrc
+    wget && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 ADD sleeper /usr/local/bin/sleeper
 ADD longsleep /usr/local/bin/longsleep

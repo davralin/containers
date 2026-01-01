@@ -8,9 +8,8 @@ RUN \
     adb \
     fastboot \
     heimdall-flash \
-    wget \
-    && \
-    /bin/rm -rf /var/lib/apt/lists/*
+    wget && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT    ["sh", "-c"]
 CMD           ["trap : TERM INT; sleep infinity & wait"]

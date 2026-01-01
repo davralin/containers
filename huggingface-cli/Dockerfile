@@ -8,7 +8,8 @@ RUN \
     ca-certificates \
     git \
     git-lfs \
-    python3-pip
+    python3-pip && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 RUN \
   /usr/bin/pip install --break-system-packages \

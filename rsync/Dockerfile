@@ -9,9 +9,8 @@ RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
     openssh-client \
-    rsync \
-    && \
-    /bin/rm -rf /var/lib/apt/lists/*
+    rsync && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 USER user:group
 

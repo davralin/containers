@@ -9,8 +9,7 @@ RUN apt-get update \
     socat           \
     tor             \
     tor-geoipdb     \
-    torsocks        \
-    && \
-    rm -rf /src/* /tmp/* /var/lib/apt/lists/*
+    torsocks && \
+  /usr/bin/rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/bin/su", "-l", "-s", "/bin/sh", "debian-tor", "-c", "/usr/bin/tor", "-f", "/etc/tor/torrc"]
