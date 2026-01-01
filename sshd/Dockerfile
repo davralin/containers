@@ -10,7 +10,7 @@ RUN \
   /usr/bin/apt-get -y install --no-install-recommends \
     openssh-server \
     openssh-sftp-server && \
-  /usr/bin/rm -rf /var/lib/apt/lists/*
+  /usr/bin/rm -rf /var/lib/apt/lists/* && \
   /usr/bin/rm -rf /etc/ssh/*.key && \
   /usr/bin/rm -rf /etc/ssh/*.pub && \
   /usr/bin/sed 's|UsePAM yes|UsePAM no|g' -i /etc/ssh/sshd_config && \
