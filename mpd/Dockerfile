@@ -6,8 +6,7 @@ RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
     mpc \
-    mpd \
-    ncmpcpp && \
+    mpd && \
   /usr/bin/rm -rf /var/lib/apt/lists/*
 
 ADD mpd.conf /etc/mpd.conf
