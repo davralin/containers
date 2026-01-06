@@ -4,4 +4,5 @@ Creating a container that I can use to backup with borgmatic/borg.
 
 ## DEPRECATED
 
-I am going to remove this soon
+As long as these images don't cost me anything, in time or money, I will keep them here.
+But I have stopped using them.
