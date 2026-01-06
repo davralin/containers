@@ -1,6 +1,6 @@
 FROM debian:stable-20251229-slim
-LABEL MAINTAINER davralin
-LABEL org.opencontainers.image.source https://github.com/davralin/containers
+LABEL MAINTAINER=davralin
+LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 
 RUN groupadd -g 1000 group && \
     useradd -m -u 1000 -g group user

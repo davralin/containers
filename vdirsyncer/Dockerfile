@@ -1,6 +1,6 @@
 FROM debian:stable-20251229-slim
-LABEL MAINTAINER davralin
-LABEL org.opencontainers.image.source https://github.com/davralin/containers
+LABEL MAINTAINER=davralin
+LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 
 RUN \
   /usr/bin/apt-get -y update && \
