@@ -1,4 +1,4 @@
-name: yt-dlp
+name: ripbox
 
 on:
   push:
@@ -29,9 +29,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: yt-dlp/
+          context: ripbox/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            davralin/yt-dlp:latest
-            ghcr.io/davralin/yt-dlp:latest
+            davralin/ripbox:latest
+            ghcr.io/davralin/ripbox:latest
