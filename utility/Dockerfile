@@ -18,6 +18,7 @@ RUN \
     nano \
     nmap \
     procps \
+    rename \
     rsync \
     shntool \
     silversearcher-ag \
