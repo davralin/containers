@@ -31,6 +31,10 @@ RUN \
   "spotdl" && \
   /usr/bin/ln -s /output/ /.config
 
+RUN \
+  /usr/bin/pip install --break-system-packages \
+  "yt-dlp-ejs"
+
 WORKDIR /output
 
 USER 1000
