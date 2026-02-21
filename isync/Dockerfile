@@ -8,6 +8,7 @@ RUN groupadd -g 1000 group && \
 RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
+    ca-certificates \
     isync && \
   /usr/bin/rm -rf /var/lib/apt/lists/*
 
