@@ -1,4 +1,4 @@
-FROM python:3.13-slim-bookworm AS build
+FROM python:3.14-slim-bookworm@sha256:55e465cb7e50cd1d7217fcb5386aa87d0356ca2cd790872142ef68d9ef6812b4 AS build
 SHELL ["sh", "-exc"]
 
 ARG COMICS_VERSION=main
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.11.2@sha256:8463b148c7bb738d82ed0a05497f4e1ba00fc6157600652c12acd77ee23751ae /uv /usr/local/bin/uv
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
@@ -25,10 +25,12 @@ ENV UV_COMPILE_BYTECODE=1 \
 RUN git clone --depth 1 --branch "${COMICS_VERSION}" https://github.com/jodal/comics.git /src
 
 # Install dependencies
+# Using --no-lock instead of --locked: upstream lockfile pins httpcore 1.0.7
+# which crashes on Python 3.14 (typing.Union.__module__ AttributeError, fixed in 1.0.9+)
 RUN --mount=type=cache,target=/root/.cache <<EOT
 cd /src
 uv sync \
-    --locked \
+    --no-lock \
     --no-dev \
     --all-extras \
     --no-install-project
@@ -38,7 +40,7 @@ EOT
 RUN --mount=type=cache,target=/root/.cache <<EOT
 cd /src
 uv sync \
-    --locked \
+    --no-lock \
     --no-dev \
     --all-extras \
     --no-editable
@@ -50,7 +52,7 @@ RUN /app/bin/comics collectstatic --noinput && /app/bin/comics compress
 
 # ---
 
-FROM python:3.13-slim-bookworm AS runtime
+FROM python:3.14-slim-bookworm@sha256:55e465cb7e50cd1d7217fcb5386aa87d0356ca2cd790872142ef68d9ef6812b4 AS runtime
 SHELL ["sh", "-exc"]
 
 ENV PATH=/app/bin:${PATH} \
