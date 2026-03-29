@@ -1,4 +1,4 @@
-FROM debian:stable-20260223-slim
+FROM debian:13.3-slim@sha256:b29a157cc8540addda9836c23750e389693bf3b6d9a932a55504899e5601a66b
 LABEL MAINTAINER=davralin
 LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 

@@ -2,5 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "Group all Dockerfile base image updates",
+      "matchDatasources": ["docker"],
+      "groupName": "container base images",
+      "pinDigests": true,
+      "schedule": ["before 7am every day"]
+    }
   ]
 }
