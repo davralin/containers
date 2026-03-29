@@ -1,4 +1,4 @@
-FROM python:3.12-slim-bookworm AS build
+FROM python:3.14-slim-bookworm AS build
 SHELL ["sh", "-exc"]
 
 ARG COMICS_VERSION=main
@@ -44,7 +44,7 @@ RUN /app/bin/comics collectstatic --noinput && /app/bin/comics compress
 
 # ---
 
-FROM python:3.12-slim-bookworm AS runtime
+FROM python:3.14-slim-bookworm AS runtime
 SHELL ["sh", "-exc"]
 
 ENV PATH=/app/bin:${PATH} \
