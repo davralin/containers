@@ -10,6 +10,12 @@
       "groupName": "container base images",
       "pinDigests": true,
       "schedule": ["before 7am every day"]
+    },
+    {
+      "description": "Use regex versioning for debian date-stamped tags (stable-YYYYMMDD-slim)",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["debian"],
+      "versioning": "regex:^(?<compatibility>stable)-(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})-slim$"
     }
   ]
 }
