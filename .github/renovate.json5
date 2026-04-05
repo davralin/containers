@@ -3,11 +3,13 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
+    "docker:pinDigests",
     ":automergeBranch",
     ":disableRateLimiting"
   ],
   "dependencyDashboardTitle": "Renovate Dashboard",
   "assigneesFromCodeOwners": true,
+  "schedule": ["before 7am"],
   "packageRules": [
     {
       "matchDatasources": ["docker"],
