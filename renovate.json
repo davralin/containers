@@ -9,7 +9,7 @@
       "matchDatasources": ["docker"],
       "groupName": "container base images",
       "pinDigests": true,
-      "schedule": ["before 7am every day"]
+      "schedule": ["before 7am"]
     }
   ]
 }
