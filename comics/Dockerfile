@@ -25,10 +25,12 @@ ENV UV_COMPILE_BYTECODE=1 \
 RUN git clone --depth 1 --branch "${COMICS_VERSION}" https://github.com/jodal/comics.git /src
 
 # Install dependencies
-# Not using --locked: upstream lockfile pins httpcore 1.0.7 which crashes on
-# Python 3.14 (typing.Union.__module__ AttributeError, fixed in httpcore 1.0.9+).
-# Without --locked, uv will re-resolve and pick up compatible versions.
+# Upstream lockfile pins httpcore 1.0.7 which crashes on Python 3.14
+# (typing.Union.__module__ AttributeError, fixed in httpcore 1.0.8+).
+# Delete the lockfile so uv sync re-resolves all dependencies.
 # See: https://github.com/davralin/containers/issues/59
+RUN rm -f /src/uv.lock
+
 RUN --mount=type=cache,target=/root/.cache <<EOT
 cd /src
 uv sync \
