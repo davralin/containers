@@ -8,8 +8,8 @@ USER root
 #   jq      - JSON processing (used in heartbeat scripts)
 #   python3 - RSS parsing, Prometheus queries, HA MCP scripts
 #   yq      - YAML processing (installed from binary, not in bookworm apt)
-#   vim-tiny - editor for debugging
-#   less    - pager
+#   kubectl - Kubernetes CLI
+#   vim-tiny, less - debugging utilities
 RUN \
   /usr/bin/apt-get -y update && \
   /usr/bin/apt-get -y install --no-install-recommends \
@@ -20,6 +20,9 @@ RUN \
   /usr/bin/rm -rf /var/lib/apt/lists/* && \
   curl -fsSL "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64" \
     -o /usr/local/bin/yq && \
-  chmod +x /usr/local/bin/yq
+  chmod +x /usr/local/bin/yq && \
+  curl -fsSL "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+    -o /usr/local/bin/kubectl && \
+  chmod +x /usr/local/bin/kubectl
 
 USER node
