@@ -1,4 +1,4 @@
-FROM python:3.14-slim-bookworm@sha256:55e465cb7e50cd1d7217fcb5386aa87d0356ca2cd790872142ef68d9ef6812b4 AS build
+FROM python:3.14-slim-bookworm@sha256:f21c0d5a44c56805654c15abccc1b2fd576c8d93aca0a3f74b4aba2dc92510e2 AS build
 SHELL ["sh", "-exc"]
 
 ARG COMICS_VERSION=main
@@ -54,7 +54,7 @@ RUN /app/bin/comics collectstatic --noinput && /app/bin/comics compress
 
 # ---
 
-FROM python:3.14-slim-bookworm@sha256:55e465cb7e50cd1d7217fcb5386aa87d0356ca2cd790872142ef68d9ef6812b4 AS runtime
+FROM python:3.14-slim-bookworm@sha256:f21c0d5a44c56805654c15abccc1b2fd576c8d93aca0a3f74b4aba2dc92510e2 AS runtime
 SHELL ["sh", "-exc"]
 
 ENV PATH=/app/bin:${PATH} \
