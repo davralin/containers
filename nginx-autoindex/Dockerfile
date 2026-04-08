@@ -1,4 +1,4 @@
-FROM nginx:1.29.8-alpine-slim@sha256:34311a2592ef8b857ca342b0d458d2978e4d05ae620ba2da5030f3d7c9b4774c
+FROM nginx:1.29.8-alpine-slim@sha256:6a9338004bea53f33e1d44a0f644ed082c3076b03747566c9535b0c724c98d09
 LABEL MAINTAINER=davralin
 LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 
