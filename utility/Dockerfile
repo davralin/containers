@@ -14,6 +14,7 @@ RUN \
     flac \
     file \
     git-core \
+    jq \
     less \
     nano \
     nmap \
