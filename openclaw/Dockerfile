@@ -1,4 +1,4 @@
-FROM ghcr.io/openclaw/openclaw:2026.4.22@sha256:639fc648f1e2cb9137cd2d4513038e3b5efdebc94a6bd7fbef42c908005945f4
+FROM ghcr.io/openclaw/openclaw:2026.4.23@sha256:1e6e1b562bbaa4816005f7a379fe2f5bc894289a08c0631f64263d705b81d809
 LABEL MAINTAINER=davralin
 LABEL org.opencontainers.image.source=https://github.com/davralin/containers
 
