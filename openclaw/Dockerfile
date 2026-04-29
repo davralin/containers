@@ -15,6 +15,7 @@ RUN \
   /usr/bin/apt-get -y install --no-install-recommends \
     jq \
     less \
+    openssh-client \
     python3 \
     vim-tiny && \
   /usr/bin/rm -rf /var/lib/apt/lists/* && \
