@@ -16,6 +16,7 @@ RUN \
     git-core \
     jq \
     less \
+    mkvtoolnix \
     nano \
     nmap \
     procps \
