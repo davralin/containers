@@ -33,7 +33,8 @@ RUN \
 
 RUN \
   /usr/bin/pip install --break-system-packages \
-  "yt-dlp-ejs"
+  "yt-dlp-ejs" \
+  "curl_cffi>=0.10,<0.15"
 
 WORKDIR /output
 
