@@ -9,7 +9,6 @@ A collection of personal container images, built with GitHub Actions for `linux/
 | `awx-ee` | AWX Execution Environment for Ansible | `quay.io/ansible/awx-ee` | ✅ |
 | `beets` | Music tagger/organizer for continuous import in Kubernetes | `debian:slim` | ✅ |
 | `borgmatic` | Borgbackup automation wrapper | `debian:slim` | ✅ |
-| `comics` | [Comics](https://github.com/jodal/comics) web app (Django) | `python:slim-bookworm` | ✅ |
 | `huggingface-cli` | Download models from HuggingFace | `debian:slim` | ✅ |
 | `isync` | IMAP mailbox sync (mbsync) | `debian:slim` | ✅ |
 | `mpd` | Music Player Daemon (internal radio station) | `debian:slim` | ✅ |
