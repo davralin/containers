@@ -19,6 +19,7 @@ RUN \
     python3-pip \
     python-is-python3 \
     rename \
+    unzip \
     webp \
     && \
     /bin/rm -rf /var/lib/apt/lists/* && \
@@ -35,6 +36,9 @@ RUN \
   /usr/bin/pip install --break-system-packages \
   "yt-dlp-ejs" \
   "curl_cffi>=0.10,<0.15"
+
+RUN \
+  curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh
 
 WORKDIR /output
 
