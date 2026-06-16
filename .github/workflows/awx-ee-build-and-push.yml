@@ -8,9 +8,15 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
@@ -27,6 +33,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.LOCAL_GITHUB_TOKEN }}
       - name: Build and push
+        id: build
         uses: docker/build-push-action@v7
         with:
           context: awx-ee/
@@ -34,6 +41,8 @@ jobs:
           push: true
           tags: |
             davralin/awx-ee:latest
-            davralin/awx-ee:awx
             ghcr.io/davralin/awx-ee:latest
-            ghcr.io/davralin/awx-ee:awx
+      - name: Sign images with Cosign
+        run: |
+          cosign sign --yes ghcr.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
+          cosign sign --yes docker.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
