@@ -32,6 +32,21 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.LOCAL_GITHUB_TOKEN }}
+      - name: Build local image for scanning
+        uses: docker/build-push-action@v7
+        with:
+          context: awx-ee/
+          platforms: linux/amd64
+          load: true
+          tags: local/awx-ee:scan
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: local/awx-ee:scan
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          severity: HIGH,CRITICAL
       - name: Build and push
         id: build
         uses: docker/build-push-action@v7
@@ -46,3 +61,17 @@ jobs:
         run: |
           cosign sign --yes ghcr.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
           cosign sign --yes docker.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ghcr.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
+          format: spdx-json
+          output-file: sbom-spdx.json
+      - name: Attest SBOM
+        run: |
+          cosign attest --yes --type spdxjson \
+            --predicate sbom-spdx.json \
+            ghcr.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
+          cosign attest --yes --type spdxjson \
+            --predicate sbom-spdx.json \
+            docker.io/davralin/awx-ee@${{ steps.build.outputs.digest }}
