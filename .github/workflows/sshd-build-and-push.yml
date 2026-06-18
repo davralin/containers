@@ -47,6 +47,7 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
           severity: HIGH,CRITICAL
+          scanners: vuln
       - name: Build and push
         id: build
         uses: docker/build-push-action@v7
