@@ -13,7 +13,7 @@ RUN \
     ffmpeg \
     jq \
     mkvtoolnix \
-    python3-dev \
+    python3 \
     python3-minimal \
     python3-mutagen \
     python3-pip \
@@ -35,7 +35,7 @@ RUN \
 RUN \
   /usr/bin/pip install --break-system-packages \
   "yt-dlp-ejs" \
-  "curl_cffi>=0.10,<0.15"
+  "curl_cffi"
 
 RUN \
   curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh
