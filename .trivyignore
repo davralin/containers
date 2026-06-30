@@ -1,0 +1,5 @@
+# ripbox
+## starlette is a transitive dependency of spotdl
+CVE-2024-47874
+CVE-2026-48818
+CVE-2026-54283
