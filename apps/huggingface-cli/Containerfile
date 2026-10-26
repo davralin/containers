@@ -1,6 +1,8 @@
-FROM debian:13.7-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
-LABEL MAINTAINER=davralin
-LABEL org.opencontainers.image.source=https://github.com/davralin/containers
+ARG VERSION
+ARG DIGEST
+ARG PYPI_VERSION
+FROM debian:${VERSION}-slim@${DIGEST}
+ARG PYPI_VERSION
 
 RUN \
   /usr/bin/apt-get -y update && \
@@ -13,6 +15,8 @@ RUN \
 
 RUN \
   /usr/bin/pip install --break-system-packages \
-  "huggingface_hub[hf_transfer]"
+  "huggingface_hub[hf_transfer]==${PYPI_VERSION}"
 
 RUN git config --global credential.helper store
+
+HEALTHCHECK NONE

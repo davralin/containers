@@ -20,4 +20,4 @@
 - [Renovate](https://github.com/renovatebot/renovate) manages base image updates
 - Apps under `apps/<name>` use the shared pull-request, release, and app-builder workflows for multi-arch builds (`linux/amd64` + `linux/arm64`)
 - Images are published to Docker Hub (`davralin/<name>`) and GHCR (`ghcr.io/davralin/<name>`)
-- Each app provides an executable `test.sh`; single-purpose command-line images should verify their primary command with its version flag
+- Each app provides an executable `test.sh`; single-purpose command-line images should verify their primary command with its version flag and derive their release version from the installed primary application package
