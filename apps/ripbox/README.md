@@ -3,6 +3,7 @@
 Media-downloader toolbox built around yt-dlp, spotdl, and Deno, with supporting
 Debian tools for media processing.
 
-The image is released with a UTC CalVer tag (`YYYY.MM.DD`) and `rolling`.
+The image is released with a UTC CalVer tag (`YYYY.MM.DD`) plus mutable `rolling`
+and `latest` aliases.
 Its Debian base and direct yt-dlp, PyPI, and Deno dependencies are pinned and
 updated by Renovate.

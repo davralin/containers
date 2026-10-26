@@ -33,7 +33,7 @@ docker pull ghcr.io/davralin/<name>:<tag>
 
 Apps under `apps/<name>` use the repository-level pull-request and release workflows for multi-architecture builds (`linux/amd64` + `linux/arm64`).
 
-The repository-level workflows discover changed app directories and delegate each build to a reusable app builder. Pull requests receive a local build and smoke test; `main` and manual releases publish the app-declared version and the `rolling` tag. They do not publish `latest`.
+The repository-level workflows discover changed app directories and delegate each build to a reusable app builder. Pull requests receive a local build and smoke test; `main` and manual releases publish the app-declared version plus the mutable `rolling` and `latest` aliases.
 
 Build and smoke-test an app locally:
 
@@ -47,7 +47,7 @@ Base images are pinned by version and digest. [Renovate](https://github.com/reno
 
 ## Security
 
-Release images include BuildKit SBOM and provenance attestations and are signed with GitHub Actions OIDC. Deploy immutable digests rather than the mutable `rolling` tag, and verify the signature before deployment:
+Release images include BuildKit SBOM and provenance attestations and are signed with GitHub Actions OIDC. Deploy immutable digests rather than the mutable `rolling` or `latest` tags, and verify the signature before deployment:
 
 ```bash
 cosign verify \

@@ -2,7 +2,7 @@
 
 ## Supported Images
 
-Only the current exact version declared by an app's `docker-bake.hcl` is supported. The `rolling` tag is mutable and is not a deployment identity.
+Only the current exact version declared by an app's `docker-bake.hcl` is supported. The `rolling` and `latest` tags are mutable aliases and are not deployment identities.
 
 Deploy images by their immutable digest. Releases include an SBOM, BuildKit provenance, and a keyless Cosign signature from GitHub Actions. Verify a digest before deployment:
 

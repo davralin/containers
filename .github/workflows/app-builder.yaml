@@ -64,7 +64,7 @@ jobs:
           test -n "$version" && test "$version" != "null"
           tag_version="${version//[^a-zA-Z0-9_.-]/-}"
           [[ "$tag_version" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]]
-          tags="davralin/${{ inputs.app }}:${tag_version},davralin/${{ inputs.app }}:rolling,ghcr.io/davralin/${{ inputs.app }}:${tag_version},ghcr.io/davralin/${{ inputs.app }}:rolling"
+          tags="davralin/${{ inputs.app }}:${tag_version},davralin/${{ inputs.app }}:rolling,davralin/${{ inputs.app }}:latest,ghcr.io/davralin/${{ inputs.app }}:${tag_version},ghcr.io/davralin/${{ inputs.app }}:rolling,ghcr.io/davralin/${{ inputs.app }}:latest"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
           printf 'tag-version=%s\n' "$tag_version" >> "$GITHUB_OUTPUT"
           printf 'tags=%s\n' "$tags" >> "$GITHUB_OUTPUT"
