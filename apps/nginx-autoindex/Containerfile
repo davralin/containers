@@ -1,0 +1,9 @@
+ARG VERSION
+ARG DIGEST
+FROM nginx:${VERSION}-alpine-slim@${DIGEST}
+
+RUN sed '/default_type/a \ \ \ \ server_tokens off;' -i /etc/nginx/nginx.conf \
+  && sed '/server_name/a \ \ \ \ autoindex\ \ \ on;' -i /etc/nginx/conf.d/default.conf
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -q -T 3 -O /dev/null http://127.0.0.1/ || exit 1
