@@ -25,13 +25,13 @@
     },
     {
       "customType": "regex",
-      "description": "Process PyPI version annotations in Docker Bake files",
+      "description": "Process external dependency version annotations in Docker Bake files",
       "managerFilePatterns": ["/(^|/)docker-bake\\.hcl$/"],
       "matchStrings": [
-        "variable \\\"PYPI_VERSION\\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\\"(?<currentValue>[^\\\"]+)\\\""
+        "variable \\\"[A-Z0-9]+(?:_[A-Z0-9]+)*_VERSION\\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\\"(?<currentValue>[^\\\"]+)\\\""
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}pypi{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}pep440{{/if}}"
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "{{{versioning}}}"
     }
   ],
   "packageRules": [

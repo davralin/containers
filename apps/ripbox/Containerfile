@@ -1,0 +1,67 @@
+ARG VERSION
+ARG DIGEST
+ARG YT_DLP_VERSION
+ARG SPOTDL_VERSION
+ARG YT_DLP_EJS_VERSION
+ARG CURL_CFFI_VERSION
+ARG DENO_VERSION
+FROM debian:${VERSION}-slim@${DIGEST}
+
+ARG TARGETARCH
+ARG YT_DLP_VERSION
+ARG SPOTDL_VERSION
+ARG YT_DLP_EJS_VERSION
+ARG CURL_CFFI_VERSION
+ARG DENO_VERSION
+
+RUN \
+  /usr/bin/apt-get -y update && \
+  /usr/bin/apt-get -y install --no-install-recommends \
+    atomicparsley \
+    attr \
+    ca-certificates \
+    coreutils \
+    curl \
+    ffmpeg \
+    jq \
+    mkvtoolnix \
+    python3 \
+    python3-minimal \
+    python3-mutagen \
+    python3-pip \
+    python-is-python3 \
+    rename \
+    unzip \
+    webp \
+    && \
+    /bin/rm -rf /var/lib/apt/lists/* && \
+    /bin/mkdir -p /output
+
+RUN \
+  /usr/bin/pip install --break-system-packages --no-cache-dir \
+    "spotdl==${SPOTDL_VERSION}" \
+    "yt-dlp==${YT_DLP_VERSION}" \
+    "yt-dlp-ejs==${YT_DLP_EJS_VERSION}" \
+    "curl_cffi==${CURL_CFFI_VERSION}" && \
+  /usr/bin/curl --fail --location --output /usr/local/bin/yt-dlp \
+    "https://github.com/yt-dlp/yt-dlp/releases/download/${YT_DLP_VERSION}/yt-dlp" && \
+  /bin/chmod 0755 /usr/local/bin/yt-dlp && \
+  /usr/bin/ln -s /output/ /.config
+
+RUN \
+  case "${TARGETARCH}" in \
+    amd64) deno_arch=x86_64-unknown-linux-gnu ;; \
+    arm64) deno_arch=aarch64-unknown-linux-gnu ;; \
+    *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; \
+  esac && \
+  /usr/bin/curl --fail --location --output /tmp/deno.zip \
+    "https://github.com/denoland/deno/releases/download/${DENO_VERSION}/deno-${deno_arch}.zip" && \
+  /usr/bin/unzip -q /tmp/deno.zip -d /usr/local/bin && \
+  /bin/rm /tmp/deno.zip
+
+WORKDIR /output
+
+USER 1000
+ENV HOME=/tmp
+
+HEALTHCHECK NONE
