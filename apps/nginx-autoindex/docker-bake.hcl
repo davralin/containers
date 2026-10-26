@@ -8,7 +8,7 @@ variable "VERSION" {
 }
 
 variable "DIGEST" {
-  default = "sha256:f45171d36c76a8b2f5ef97108a3a8a2294248a6578a0a180edc2d78f7d2edc26"
+  default = "sha256:6e67f8eaac94fc456588d4ff6c470d984841f5b5dc4279863d5cbe6ec5a60def"
 }
 
 variable "TAGS" {
