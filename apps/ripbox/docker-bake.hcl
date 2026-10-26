@@ -8,7 +8,7 @@ variable "VERSION" {
 }
 
 variable "DIGEST" {
-  default = "sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad"
+  default = "sha256:4c25275446ca371766b8b093c696782eabce06263fccacb8d5d813b3dc44b308"
 }
 
 variable "YT_DLP_VERSION" {
