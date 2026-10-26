@@ -41,7 +41,7 @@ Build and smoke-test an app locally:
 ./apps/<name>/test.sh
 ```
 
-Single-purpose command-line images use their application's version command as a smoke test. Debian-package images derive their release version from the installed primary package in that smoke-test image. Services use a behavior-appropriate test instead.
+Single-purpose command-line images use their application's version command as a smoke test. Debian-package images derive their release version from the installed primary package in that smoke-test image; toolboxes use their pinned base-image version. Services use a behavior-appropriate test instead.
 
 Base images are pinned by version and digest. [Renovate](https://github.com/renovatebot/renovate) keeps them up to date — both version bumps and digest changes (security rebuilds) are tracked automatically.
 
