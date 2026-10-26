@@ -56,10 +56,17 @@ jobs:
         id: version
         working-directory: apps/${{ inputs.app }}
         run: |
-          version="$(docker buildx bake --print --progress=quiet image | jq --raw-output '.target.image.labels["org.opencontainers.image.version"]')"
+          if [[ -x ./version.sh ]]; then
+            version="$(./version.sh)"
+          else
+            version="$(docker buildx bake --print --progress=quiet image | jq --raw-output '.target.image.labels["org.opencontainers.image.version"]')"
+          fi
           test -n "$version" && test "$version" != "null"
-          tags="davralin/${{ inputs.app }}:${version},davralin/${{ inputs.app }}:rolling,ghcr.io/davralin/${{ inputs.app }}:${version},ghcr.io/davralin/${{ inputs.app }}:rolling"
+          tag_version="${version//[^a-zA-Z0-9_.-]/-}"
+          [[ "$tag_version" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]]
+          tags="davralin/${{ inputs.app }}:${tag_version},davralin/${{ inputs.app }}:rolling,ghcr.io/davralin/${{ inputs.app }}:${tag_version},ghcr.io/davralin/${{ inputs.app }}:rolling"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+          printf 'tag-version=%s\n' "$tag_version" >> "$GITHUB_OUTPUT"
           printf 'tags=%s\n' "$tags" >> "$GITHUB_OUTPUT"
       - name: Login to Docker Hub
         if: inputs.release
@@ -78,6 +85,7 @@ jobs:
         if: inputs.release
         id: publish
         env:
+          IMAGE_VERSION: ${{ steps.version.outputs.version }}
           TAGS: ${{ steps.version.outputs.tags }}
         run: |
           cd apps/${{ inputs.app }}

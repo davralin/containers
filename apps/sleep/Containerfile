@@ -1,0 +1,15 @@
+ARG VERSION
+ARG DIGEST
+FROM debian:${VERSION}-slim@${DIGEST}
+
+RUN \
+  /usr/bin/apt-get -y update && \
+  /usr/bin/apt-get -y install --no-install-recommends \
+    coreutils && \
+  /usr/bin/rm -rf /var/lib/apt/lists/* && \
+   /usr/bin/echo 'alias ll="ls -l"' >> /root/.bashrc
+
+HEALTHCHECK NONE
+
+ENTRYPOINT    ["sh", "-c"]
+CMD           ["trap : TERM INT; sleep infinity & wait"]

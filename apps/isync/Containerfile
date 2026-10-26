@@ -1,6 +1,6 @@
-FROM debian:13.7-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
-LABEL MAINTAINER=davralin
-LABEL org.opencontainers.image.source=https://github.com/davralin/containers
+ARG VERSION
+ARG DIGEST
+FROM debian:${VERSION}-slim@${DIGEST}
 
 RUN groupadd -g 1000 group && \
     useradd -m -u 1000 -g group user
@@ -11,5 +11,7 @@ RUN \
     ca-certificates \
     isync && \
   /usr/bin/rm -rf /var/lib/apt/lists/*
+
+HEALTHCHECK NONE
 
 USER user:group

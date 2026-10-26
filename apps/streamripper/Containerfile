@@ -1,0 +1,12 @@
+ARG VERSION
+ARG DIGEST
+FROM debian:${VERSION}-slim@${DIGEST}
+
+RUN \
+  /usr/bin/apt-get -y update && \
+  /usr/bin/apt-get -y install --no-install-recommends \
+    ffmpeg \
+   streamripper && \
+   /usr/bin/rm -rf /var/lib/apt/lists/*
+
+HEALTHCHECK NONE

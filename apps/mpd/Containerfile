@@ -1,6 +1,6 @@
-FROM debian:13.7-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
-LABEL MAINTAINER=davralin
-LABEL org.opencontainers.image.source=https://github.com/davralin/containers
+ARG VERSION
+ARG DIGEST
+FROM debian:${VERSION}-slim@${DIGEST}
 
 RUN \
   /usr/bin/apt-get -y update && \
@@ -20,5 +20,8 @@ USER 100
 VOLUME /var/lib/mpd
 WORKDIR /var/lib/mpd
 EXPOSE 6600 8000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD mpc status >/dev/null 2>&1 || exit 1
 
 ENTRYPOINT    ["/usr/bin/mpd", "--no-daemon", "/etc/mpd.conf"]

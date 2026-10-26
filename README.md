@@ -16,12 +16,8 @@ A collection of personal container images, built with GitHub Actions for `linux/
 | `ripbox` | yt-dlp + spotdl media downloader with support tools | `debian:slim` | ✅ |
 | `rsync` | rsync file transfer | `debian:slim` | ✅ |
 | `sleep` | Continuous sleep container (debug shell / sidecar) | `debian:slim` | ✅ |
-| `sshd` | SSH daemon | `debian:slim` | ⚠️ Deprecated |
 | `streamripper` | Internet radio stream ripper | `debian:slim` | ✅ |
 | `utility` | General-purpose tools (curl, vim, ffmpeg, calibre, sqlite3, etc.) | `debian:slim` | ✅ |
-| `vdirsyncer` | CalDAV/CardDAV synchronization | `debian:slim` | ⚠️ Deprecated |
-
-> **Deprecated** images are kept as long as they don't cost time or money to maintain, but are no longer actively used.
 
 ## Registries
 
@@ -42,8 +38,10 @@ The repository-level workflows discover changed app directories and delegate eac
 Build and smoke-test an app locally:
 
 ```bash
-./apps/awx-ee/test.sh
+./apps/<name>/test.sh
 ```
+
+Single-purpose command-line images use their application's version command as a smoke test. Debian-package images derive their release version from the installed primary package in that smoke-test image. Services use a behavior-appropriate test instead.
 
 Base images are pinned by version and digest. [Renovate](https://github.com/renovatebot/renovate) keeps them up to date — both version bumps and digest changes (security rebuilds) are tracked automatically.
 
