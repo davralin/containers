@@ -1,0 +1,54 @@
+---
+name: Pull Request
+
+on:
+  pull_request:
+    paths:
+      - "apps/**"
+      - ".github/workflows/app-builder.yaml"
+      - ".github/workflows/pull-request.yaml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Get changed apps
+        id: changed-files
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
+          dir_names: true
+          dir_names_exclude_current_dir: true
+          dir_names_max_depth: 1
+          escape_json: false
+          json: true
+          path: apps
+
+  build:
+    if: needs.prepare.outputs.apps != '[]'
+    name: Build ${{ matrix.app }}
+    needs:
+      - prepare
+    uses: ./.github/workflows/app-builder.yaml
+    with:
+      app: ${{ matrix.app }}
+      release: false
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        app: ${{ fromJSON(needs.prepare.outputs.apps) }}

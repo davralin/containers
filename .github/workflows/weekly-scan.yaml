@@ -1,0 +1,87 @@
+---
+name: Weekly Scan
+
+on:
+  schedule:
+    - cron: "17 3 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.apps.outputs.apps }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Find apps
+        id: apps
+        shell: bash
+        run: |
+          apps=()
+          for directory in apps/*; do
+            test -f "$directory/docker-bake.hcl" || continue
+            apps+=("${directory#apps/}")
+          done
+          apps="$(jq --compact-output --null-input '$ARGS.positional' --args "${apps[@]}")"
+          printf 'apps=%s\n' "$apps" >> "$GITHUB_OUTPUT"
+
+  scan:
+    if: needs.prepare.outputs.apps != '[]'
+    name: Scan ${{ matrix.app }}
+    needs:
+      - prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        app: ${{ fromJSON(needs.prepare.outputs.apps) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Get app version
+        id: version
+        working-directory: apps/${{ matrix.app }}
+        run: |
+          version="$(docker buildx bake --print --progress=quiet image | jq --raw-output '.target.image.labels["org.opencontainers.image.version"]')"
+          test -n "$version" && test "$version" != "null"
+          printf 'image=ghcr.io/davralin/%s:%s\n' "${{ matrix.app }}" "$version" >> "$GITHUB_OUTPUT"
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@8f28faec26515256b6d22074d1d2a8986f4cbd87 # master
+        with:
+          image-ref: ${{ steps.version.outputs.image }}
+          scanners: vuln,secret
+          format: sarif
+          output: trivy-results.sarif
+          exit-code: 0
+          severity: HIGH,CRITICAL
+          limit-severities-for-sarif: true
+      - name: Publish Trivy results
+        uses: github/codeql-action/upload-sarif@5c8ea125689a2c5ae2672d1d914ac4bcd95d1b4b # v3
+        with:
+          sarif_file: trivy-results.sarif
+          category: weekly-trivy-${{ matrix.app }}
+      - name: Scan image with Grype
+        id: grype
+        uses: anchore/scan-action@1638637db639e0ade3258b51db49a9a137574c3e # v6
+        with:
+          image: ${{ steps.version.outputs.image }}
+          fail-build: false
+          severity-cutoff: high
+          output-format: sarif
+          cache-db: true
+      - name: Publish Grype results
+        uses: github/codeql-action/upload-sarif@5c8ea125689a2c5ae2672d1d914ac4bcd95d1b4b # v3
+        with:
+          sarif_file: ${{ steps.grype.outputs.sarif }}
+          category: weekly-grype-${{ matrix.app }}

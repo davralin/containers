@@ -4,6 +4,7 @@
     "config:recommended",
     "docker:enableMajor",
     "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
     ":automergeBranch",
     ":disableRateLimiting"
   ],
@@ -11,6 +12,18 @@
   "assigneesFromCodeOwners": true,
   "ignoreTests": true,
   "schedule": ["before 7am"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Process Docker Bake version and digest annotations",
+      "managerFilePatterns": ["/(^|/)docker-bake\\.hcl$/"],
+      "matchStrings": [
+        "variable \\\"VERSION\\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\\"(?<currentValue>[^\\\"]+)\\\"\\n\\}\\n\\nvariable \\\"DIGEST\\\" \\{\\n  default = \\\"(?<currentDigest>sha256:[^\\\"]+)\\\""
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
   "packageRules": [
     {
       "matchDatasources": ["docker"],

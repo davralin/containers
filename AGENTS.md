@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 ## Commit Style
 
@@ -18,5 +18,5 @@
 
 - Base images are pinned by version and digest (e.g. `debian:13.4-slim@sha256:...`)
 - [Renovate](https://github.com/renovatebot/renovate) manages base image updates
-- Each container has its own GitHub Actions workflow for multi-arch builds (`linux/amd64` + `linux/arm64`)
+- Apps under `apps/<name>` use the shared pull-request, release, and app-builder workflows for multi-arch builds (`linux/amd64` + `linux/arm64`)
 - Images are published to Docker Hub (`davralin/<name>`) and GHCR (`ghcr.io/davralin/<name>`)

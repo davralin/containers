@@ -1,7 +1,6 @@
-FROM quay.io/ansible/awx-ee:24.6.1@sha256:89593d2a0268acacdbd1c075d8810ab50d961cf7769e36de19219bb6cb4efcc1
-LABEL MAINTAINER=davralin
-LABEL org.opencontainers.image.source=https://github.com/davralin/containers
-
+ARG VERSION
+ARG DIGEST
+FROM quay.io/ansible/awx-ee:${VERSION}@${DIGEST}
 USER root
 RUN dnf install -y \
   jq	\
@@ -17,5 +16,7 @@ RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
     community.general \
     community.windows \
     containers.podman
+
+HEALTHCHECK NONE
 
 USER 1000
