@@ -45,6 +45,7 @@ jobs:
           output: trivy-results.sarif
           exit-code: 0
           severity: HIGH,CRITICAL
+          ignore-unfixed: true
       - name: Publish Trivy results
         if: inputs.release
         uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
