@@ -45,6 +45,7 @@ jobs:
           output: trivy-results.sarif
           exit-code: 0
           severity: HIGH,CRITICAL
+          limit-severities-for-sarif: true
           ignore-unfixed: true
       - name: Publish Trivy results
         if: inputs.release
