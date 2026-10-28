@@ -26,7 +26,7 @@ variable "SOURCE_SHA256" {
 
 variable "UV_VERSION" {
   // renovate: datasource=docker depName=ghcr.io/astral-sh/uv versioning=semver
-  default = "0.10.8"
+  default = "0.13.6"
 }
 
 variable "UV_DIGEST" {
