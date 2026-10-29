@@ -3,12 +3,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=quay.io/ansible/awx-ee versioning=semver
-  default = "24.6.1"
-}
-
-variable "DIGEST" {
-  default = "sha256:89593d2a0268acacdbd1c075d8810ab50d961cf7769e36de19219bb6cb4efcc1"
+  default = "24.6.1-ubi9.8"
 }
 
 variable "TAGS" {
@@ -24,13 +19,8 @@ group "default" {
 }
 
 target "image" {
-  context    = "."
+  context    = ".build"
   dockerfile = "Containerfile"
-
-  args = {
-    VERSION = VERSION
-    DIGEST  = DIGEST
-  }
 
   labels = {
     "org.opencontainers.image.source"  = SOURCE

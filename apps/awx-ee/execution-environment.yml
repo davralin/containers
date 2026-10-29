@@ -1,0 +1,34 @@
+---
+version: 3
+
+images:
+  base_image:
+    # renovate: datasource=docker depName=registry.access.redhat.com/ubi9/ubi versioning=loose
+    name: registry.access.redhat.com/ubi9/ubi:9.8@sha256:5f08e80aa970ae77712e75e5e857ac0b396abc900823c4d041c1150a9538a13f
+
+dependencies:
+  # Stay on AWX 24.6.1's Ansible Core compatibility line during the migration.
+  ansible_core:
+    # renovate: datasource=pypi depName=ansible-core versioning=pep440
+    package_pip: ansible-core==2.15.13
+  ansible_runner:
+    # renovate: datasource=pypi depName=ansible-runner versioning=pep440
+    package_pip: ansible-runner==2.4.3
+  python_interpreter:
+    package_system: python3.11
+    python_path: /usr/bin/python3.11
+  galaxy: requirements.yml
+  system: bindep.txt
+
+options:
+  package_manager_path: /usr/bin/dnf
+  user: "1000"
+
+additional_build_steps:
+  # Pull fixed RPMs from UBI before installing the execution environment.
+  append_base:
+    - RUN $PKGMGR update -y && $PKGMGR clean all
+  # The UBI bootstrap version has fixed High-severity vulnerabilities.
+  append_final:
+    # renovate: datasource=pypi depName=setuptools versioning=pep440
+    - RUN $PYCMD -m pip install --no-cache-dir setuptools==84.2.1

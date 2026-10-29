@@ -32,6 +32,38 @@
       ],
       "datasourceTemplate": "{{{datasource}}}",
       "versioningTemplate": "{{{versioning}}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Process AWX execution environment base image",
+      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    name: [^:@]+:(?<currentValue>[^@]+)@(?<currentDigest>sha256:[^\\s]+)"
+      ],
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "{{{versioning}}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Process pinned Python dependencies in the AWX execution environment",
+      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    package_pip: [^=\\s]+==(?<currentValue>[^\\s]+)",
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    - RUN \\$PYCMD -m pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "{{{versioning}}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Process the pinned Ansible Builder toolchain",
+      "managerFilePatterns": ["/(^|/)apps/awx-ee/generate\\.sh$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    /tmp/ansible-builder/bin/pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)",
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\nbuilder_image=\\\"python:(?<currentValue>[^@\\s]+)@(?<currentDigest>sha256:[^\\s]+)\\\""
+      ],
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "{{{versioning}}}"
     }
   ],
   "packageRules": [
