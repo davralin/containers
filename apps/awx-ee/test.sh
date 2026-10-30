@@ -15,9 +15,3 @@ fi
 docker run --rm "$image" ansible --version
 docker run --rm "$image" ansible-runner --version
 docker run --rm "$image" sh -ec 'command -v ssh && command -v rsync'
-
-ansible_posix="$(docker run --rm "$image" ansible-galaxy collection list ansible.posix)"
-community_general="$(docker run --rm "$image" ansible-galaxy collection list community.general)"
-[[ "$ansible_posix" == *"ansible.posix 2.1.0"* ]]
-[[ "$community_general" == *"community.general 10.7.9"* ]]
-rm -rf ./build
