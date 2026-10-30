@@ -4,7 +4,7 @@ version: 3
 images:
   base_image:
     # renovate: datasource=docker depName=registry.access.redhat.com/ubi9/ubi versioning=loose
-    name: registry.access.redhat.com/ubi9/ubi:9.8@sha256:5f08e80aa970ae77712e75e5e857ac0b396abc900823c4d041c1150a9538a13f
+    name: registry.access.redhat.com/ubi9/ubi:9.8-1793179168@sha256:5f08e80aa970ae77712e75e5e857ac0b396abc900823c4d041c1150a9538a13f
 
 dependencies:
   # Stay on AWX 24.6.1's Ansible Core compatibility line during the migration.
