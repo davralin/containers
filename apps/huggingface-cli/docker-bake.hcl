@@ -13,7 +13,7 @@ variable "DIGEST" {
 
 variable "PYPI_VERSION" {
   // renovate: datasource=pypi depName=huggingface_hub versioning=pep440
-  default = "2.3.0"
+  default = "2.4.0"
 }
 
 variable "IMAGE_VERSION" {
