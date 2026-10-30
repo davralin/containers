@@ -2,8 +2,9 @@ variable "APP" {
   default = "awx-ee"
 }
 
-variable "VERSION" {
-  default = "24.6.1-ubi9.8"
+variable "ANSIBLE_CORE_VERSION" {
+  // renovate: datasource=pypi depName=ansible-core versioning=pep440
+  default = "2.15.13"
 }
 
 variable "TAGS" {
@@ -24,7 +25,7 @@ target "image" {
 
   labels = {
     "org.opencontainers.image.source"  = SOURCE
-    "org.opencontainers.image.version" = VERSION
+    "org.opencontainers.image.version" = ANSIBLE_CORE_VERSION
     "org.opencontainers.image.vendor"  = "davralin"
   }
 }
@@ -34,7 +35,7 @@ target "image" {
 target "image-local" {
   inherits = ["image"]
   output   = ["type=docker"]
-  tags     = TAGS == "" ? ["${APP}:${VERSION}"] : split(",", TAGS)
+  tags     = TAGS == "" ? ["${APP}:${ANSIBLE_CORE_VERSION}"] : split(",", TAGS)
 }
 
 target "image-all" {
