@@ -53,6 +53,28 @@ jobs:
         with:
           sarif_file: trivy-results.sarif
           category: trivy-${{ inputs.app }}
+      - name: Scan image with Grype
+        if: inputs.release
+        id: grype
+        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7
+        with:
+          image: local/${{ inputs.app }}:test
+          fail-build: false
+          severity-cutoff: high
+          only-fixed: true
+          output-format: sarif
+          cache-db: true
+      - name: Limit Grype SARIF severities
+        if: inputs.release
+        run: |
+          jq '(.runs[].results) |= map(select(.level == "error"))' \
+            "${{ steps.grype.outputs.sarif }}" > grype-results.sarif
+      - name: Publish Grype results
+        if: inputs.release
+        uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          sarif_file: grype-results.sarif
+          category: weekly-grype-${{ inputs.app }}
       - name: Get app version
         if: inputs.release
         id: version
