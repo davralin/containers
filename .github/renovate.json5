@@ -11,7 +11,6 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "assigneesFromCodeOwners": true,
   "ignoreTests": true,
-  "schedule": ["before 7am"],
   "customManagers": [
     {
       "customType": "regex",
