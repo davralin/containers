@@ -1,140 +1,185 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "docker:enableMajor",
-    "docker:pinDigests",
-    "helpers:pinGitHubActionDigests",
-    ":automergeBranch",
-    ":disableRateLimiting"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    'docker:enableMajor',
+    'docker:pinDigests',
+    'helpers:pinGitHubActionDigests',
+    ':automergeBranch',
+    ':disableRateLimiting',
   ],
-  "dependencyDashboardTitle": "Renovate Dashboard",
-  "assigneesFromCodeOwners": true,
-  "ignoreTests": true,
-  "customManagers": [
+  dependencyDashboardTitle: 'Renovate Dashboard',
+  assigneesFromCodeOwners: true,
+  ignoreTests: true,
+  customManagers: [
     {
-      "customType": "regex",
-      "description": "Process Docker Bake version and digest annotations",
-      "managerFilePatterns": ["/(^|/)docker-bake\\.hcl$/"],
-      "matchStrings": [
-        "variable \\\"VERSION\\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\\"(?<currentValue>[^\\\"]+)\\\"\\n\\}\\n\\nvariable \\\"DIGEST\\\" \\{\\n  default = \\\"(?<currentDigest>sha256:[^\\\"]+)\\\""
+      customType: 'regex',
+      description: 'Process Docker Bake version and digest annotations',
+      managerFilePatterns: [
+        '/(^|/)docker-bake\\.hcl$/',
       ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      matchStrings: [
+        'variable \\"VERSION\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\"(?<currentValue>[^\\"]+)\\"\\n\\}\\n\\nvariable \\"DIGEST\\" \\{\\n  default = \\"(?<currentDigest>sha256:[^\\"]+)\\"',
+      ],
+      datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
     },
     {
-      "customType": "regex",
-      "description": "Process external dependency version annotations in Docker Bake files",
-      "managerFilePatterns": ["/(^|/)docker-bake\\.hcl$/"],
-      "matchStrings": [
-        "variable \\\"[A-Z0-9]+(?:_[A-Z0-9]+)*_VERSION\\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\\"(?<currentValue>[^\\\"]+)\\\""
+      customType: 'regex',
+      description: 'Process external dependency version annotations in Docker Bake files',
+      managerFilePatterns: [
+        '/(^|/)docker-bake\\.hcl$/',
       ],
-      "datasourceTemplate": "{{{datasource}}}",
-      "versioningTemplate": "{{{versioning}}}"
+      matchStrings: [
+        'variable \\"[A-Z0-9]+(?:_[A-Z0-9]+)*_VERSION\\" \\{\\n  // renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  default = \\"(?<currentValue>[^\\"]+)\\"',
+      ],
+      datasourceTemplate: '{{{datasource}}}',
+      versioningTemplate: '{{{versioning}}}',
     },
     {
-      "customType": "regex",
-      "description": "Process AWX execution environment base image",
-      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    name: [^:@]+:(?<currentValue>[^@]+)@(?<currentDigest>sha256:[^\\s]+)"
+      customType: 'regex',
+      description: 'Process AWX execution environment base image',
+      managerFilePatterns: [
+        '/(^|/)apps/awx-ee/execution-environment\\.yml$/',
       ],
-      "datasourceTemplate": "{{{datasource}}}",
-      "versioningTemplate": "{{{versioning}}}"
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    name: [^:@]+:(?<currentValue>[^@]+)@(?<currentDigest>sha256:[^\\s]+)',
+      ],
+      datasourceTemplate: '{{{datasource}}}',
+      versioningTemplate: '{{{versioning}}}',
     },
     {
-      "customType": "regex",
-      "description": "Process pinned Python dependencies in the AWX execution environment",
-      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    package_pip: [^=\\s]+==(?<currentValue>[^\\s]+)",
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    - RUN \\$PYCMD -m pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)"
+      customType: 'regex',
+      description: 'Process pinned Python dependencies in the AWX execution environment',
+      managerFilePatterns: [
+        '/(^|/)apps/awx-ee/execution-environment\\.yml$/',
       ],
-      "datasourceTemplate": "{{{datasource}}}",
-      "versioningTemplate": "{{{versioning}}}"
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    package_pip: [^=\\s]+==(?<currentValue>[^\\s]+)',
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    - RUN \\$PYCMD -m pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)',
+      ],
+      datasourceTemplate: '{{{datasource}}}',
+      versioningTemplate: '{{{versioning}}}',
     },
     {
-      "customType": "regex",
-      "description": "Process the AWX execution environment Python interpreter",
-      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  python_interpreter:\\n    package_system: python(?<currentValue>3\\.\\d+)\\n    python_path: /usr/bin/python3\\.\\d+"
+      customType: 'regex',
+      description: 'Process the AWX execution environment Python interpreter',
+      managerFilePatterns: [
+        '/(^|/)apps/awx-ee/execution-environment\\.yml$/',
       ],
-      "datasourceTemplate": "{{{datasource}}}",
-      "versioningTemplate": "{{{versioning}}}",
-      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)$",
-      "autoReplaceStringTemplate": "# renovate: datasource=docker depName=docker.io/library/python versioning=loose\\n  python_interpreter:\\n    package_system: python{{{newValue}}}\\n    python_path: /usr/bin/python{{{newValue}}}"
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  python_interpreter:\\n    package_system: python(?<currentValue>3\\.\\d+)\\n    python_path: /usr/bin/python3\\.\\d+',
+      ],
+      datasourceTemplate: '{{{datasource}}}',
+      versioningTemplate: '{{{versioning}}}',
+      extractVersionTemplate: '^(?<version>\\d+\\.\\d+)$',
+      autoReplaceStringTemplate: '# renovate: datasource=docker depName=docker.io/library/python versioning=loose\\n  python_interpreter:\\n    package_system: python{{{newValue}}}\\n    python_path: /usr/bin/python{{{newValue}}}',
     },
     {
-      "customType": "regex",
-      "description": "Process the pinned Ansible Builder toolchain",
-      "managerFilePatterns": ["/(^|/)apps/awx-ee/generate\\.sh$/"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    /tmp/ansible-builder/bin/pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)",
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\nbuilder_image=\\\"python:(?<currentValue>[^@\\s]+)@(?<currentDigest>sha256:[^\\s]+)\\\""
+      customType: 'regex',
+      description: 'Process the pinned Ansible Builder toolchain',
+      managerFilePatterns: [
+        '/(^|/)apps/awx-ee/generate\\.sh$/',
       ],
-      "datasourceTemplate": "{{{datasource}}}",
-      "versioningTemplate": "{{{versioning}}}"
-    }
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n    /tmp/ansible-builder/bin/pip install --no-cache-dir [^=\\s]+==(?<currentValue>[^\\s]+)',
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\nbuilder_image=\\"python:(?<currentValue>[^@\\s]+)@(?<currentDigest>sha256:[^\\s]+)\\"',
+      ],
+      datasourceTemplate: '{{{datasource}}}',
+      versioningTemplate: '{{{versioning}}}',
+    },
   ],
-  "packageRules": [
+  packageRules: [
     {
-      // The execution environment selects a system Python minor, not an image.
-      "matchManagers": ["regex"],
-      "matchDepNames": ["docker.io/library/python"],
-      "matchFileNames": ["apps/awx-ee/execution-environment.yml"],
-      "pinDigests": false
+      matchManagers: [
+        'custom.regex',
+      ],
+      matchDepNames: [
+        'docker.io/library/python',
+      ],
+      matchFileNames: [
+        'apps/awx-ee/execution-environment.yml',
+      ],
+      pinDigests: false,
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["major"],
-      "commitMessagePrefix": "feat(container)!: ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": " ( {{currentVersion}} → {{newVersion}} )"
+      matchDatasources: [
+        'docker',
+      ],
+      matchUpdateTypes: [
+        'major',
+      ],
+      commitMessagePrefix: 'feat(container)!: ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: ' ( {{currentVersion}} → {{newVersion}} )',
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["minor"],
-      "commitMessagePrefix": "feat(container): ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": " ( {{currentVersion}} → {{newVersion}} )"
+      matchDatasources: [
+        'docker',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      commitMessagePrefix: 'feat(container): ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: ' ( {{currentVersion}} → {{newVersion}} )',
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["patch"],
-      "commitMessagePrefix": "fix(container): ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": " ( {{currentVersion}} → {{newVersion}} )"
+      matchDatasources: [
+        'docker',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+      commitMessagePrefix: 'fix(container): ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: ' ( {{currentVersion}} → {{newVersion}} )',
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "automerge": true,
-      "automergeType": "branch",
-      "commitMessagePrefix": "chore(container): ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "( {{currentDigestShort}} → {{newDigestShort}} )"
+      matchDatasources: [
+        'docker',
+      ],
+      matchUpdateTypes: [
+        'digest',
+      ],
+      automerge: true,
+      automergeType: 'branch',
+      commitMessagePrefix: 'chore(container): ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '( {{currentDigestShort}} → {{newDigestShort}} )',
     },
     {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["major"],
-      "commitMessagePrefix": "feat(github-action)!: ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
+      matchManagers: [
+        'github-actions',
+      ],
+      matchUpdateTypes: [
+        'major',
+      ],
+      commitMessagePrefix: 'feat(github-action)!: ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '( {{currentVersion}} → {{newVersion}} )',
     },
     {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor"],
-      "commitMessagePrefix": "feat(github-action): ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
+      matchManagers: [
+        'github-actions',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      commitMessagePrefix: 'feat(github-action): ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '( {{currentVersion}} → {{newVersion}} )',
     },
     {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch"],
-      "commitMessagePrefix": "fix(github-action)!: ",
-      "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
-    }
-  ]
+      matchManagers: [
+        'github-actions',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+      commitMessagePrefix: 'fix(github-action)!: ',
+      commitMessageTopic: '{{depName}}',
+      commitMessageExtra: '( {{currentVersion}} → {{newVersion}} )',
+    },
+  ],
 }
