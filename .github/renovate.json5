@@ -63,7 +63,7 @@
       "datasourceTemplate": "{{{datasource}}}",
       "versioningTemplate": "{{{versioning}}}",
       "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)$",
-      "autoReplaceStringTemplate": "# renovate: datasource={{datasource}} depName={{depName}} versioning={{versioning}}\\n  python_interpreter:\\n    package_system: python{{{newValue}}}\\n    python_path: /usr/bin/python{{{newValue}}}"
+      "autoReplaceStringTemplate": "# renovate: datasource=docker depName=docker.io/library/python versioning=loose\\n  python_interpreter:\\n    package_system: python{{{newValue}}}\\n    python_path: /usr/bin/python{{{newValue}}}"
     },
     {
       "customType": "regex",
