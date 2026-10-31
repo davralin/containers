@@ -9,7 +9,7 @@ images:
 dependencies:
   ansible_core:
     # renovate: datasource=pypi depName=ansible-core versioning=pep440
-    package_pip: ansible-core==2.15.13
+    package_pip: ansible-core==2.21.5
   ansible_runner:
     # renovate: datasource=pypi depName=ansible-runner versioning=pep440
     package_pip: ansible-runner==2.4.3
