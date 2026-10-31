@@ -79,6 +79,13 @@
   ],
   "packageRules": [
     {
+      // The execution environment selects a system Python minor, not an image.
+      "matchManagers": ["regex"],
+      "matchDepNames": ["docker.io/library/python"],
+      "matchFileNames": ["apps/awx-ee/execution-environment.yml"],
+      "pinDigests": false
+    },
+    {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(container)!: ",
