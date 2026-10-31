@@ -7,13 +7,13 @@ images:
     name: registry.access.redhat.com/ubi9/ubi:9.8-1793179168@sha256:5f08e80aa970ae77712e75e5e857ac0b396abc900823c4d041c1150a9538a13f
 
 dependencies:
-  # Stay on AWX 24.6.1's Ansible Core compatibility line during the migration.
   ansible_core:
     # renovate: datasource=pypi depName=ansible-core versioning=pep440
     package_pip: ansible-core==2.15.13
   ansible_runner:
     # renovate: datasource=pypi depName=ansible-runner versioning=pep440
     package_pip: ansible-runner==2.4.3
+  # renovate: datasource=docker depName=docker.io/library/python versioning=loose
   python_interpreter:
     package_system: python3.11
     python_path: /usr/bin/python3.11

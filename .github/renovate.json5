@@ -56,6 +56,18 @@
     },
     {
       "customType": "regex",
+      "description": "Process the AWX execution environment Python interpreter",
+      "managerFilePatterns": ["/(^|/)apps/awx-ee/execution-environment\\.yml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n  python_interpreter:\\n    package_system: python(?<currentValue>3\\.\\d+)\\n    python_path: /usr/bin/python3\\.\\d+"
+      ],
+      "datasourceTemplate": "{{{datasource}}}",
+      "versioningTemplate": "{{{versioning}}}",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)$",
+      "autoReplaceStringTemplate": "# renovate: datasource={{datasource}} depName={{depName}} versioning={{versioning}}\\n  python_interpreter:\\n    package_system: python{{{newValue}}}\\n    python_path: /usr/bin/python{{{newValue}}}"
+    },
+    {
+      "customType": "regex",
       "description": "Process the pinned Ansible Builder toolchain",
       "managerFilePatterns": ["/(^|/)apps/awx-ee/generate\\.sh$/"],
       "matchStrings": [
