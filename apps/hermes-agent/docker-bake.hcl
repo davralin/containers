@@ -13,7 +13,7 @@ variable "PYTHON_DIGEST" {
 
 variable "UPSTREAM_VERSION" {
   // renovate: datasource=github-tags depName=NousResearch/hermes-agent versioning=semver
-  default = "v0.22.5"
+  default = "v0.22.6+canary.20261103T064339Z"
 }
 
 variable "SOURCE_COMMIT" {
