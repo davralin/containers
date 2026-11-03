@@ -13,10 +13,9 @@ dependencies:
   ansible_runner:
     # renovate: datasource=pypi depName=ansible-runner versioning=pep440
     package_pip: ansible-runner==2.4.3
-  # renovate: datasource=docker depName=docker.io/library/python versioning=loose
   python_interpreter:
-    package_system: python3.11
-    python_path: /usr/bin/python3.11
+    package_system: python3.12
+    python_path: /usr/bin/python3.12
   galaxy: requirements.yml
   system: bindep.txt
 
