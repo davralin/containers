@@ -4,7 +4,7 @@ variable "APP" {
 
 variable "ANSIBLE_CORE_VERSION" {
   // renovate: datasource=pypi depName=ansible-core versioning=pep440
-  default = "2.15.13"
+  default = "2.21.5"
 }
 
 variable "TAGS" {
