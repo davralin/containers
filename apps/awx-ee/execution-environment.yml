@@ -3,19 +3,19 @@ version: 3
 
 images:
   base_image:
-    # renovate: datasource=docker depName=registry.access.redhat.com/ubi9/ubi versioning=loose
-    name: registry.access.redhat.com/ubi9/ubi:9.8-1793580630@sha256:8f989cc9270da6abec0144c22846ed1e6e92e462dc7768ce0981c4ac1d574733
+    # renovate: datasource=docker depName=registry.access.redhat.com/ubi10/ubi versioning=loose
+    name: registry.access.redhat.com/ubi10/ubi:10.2-1793697573@sha256:b0a29d36a12733acd937b3f857678539d7ce2dab63bd048cfae8685247b4365c
 
 dependencies:
   ansible_core:
     # renovate: datasource=pypi depName=ansible-core versioning=pep440
-    package_pip: ansible-core==2.21.6
+    package_pip: ansible-core==2.22.0
   ansible_runner:
     # renovate: datasource=pypi depName=ansible-runner versioning=pep440
     package_pip: ansible-runner==2.4.3
   python_interpreter:
-    package_system: python3.12
-    python_path: /usr/bin/python3.12
+    package_system: python3.14
+    python_path: /usr/bin/python3.14
   galaxy: requirements.yml
   system: bindep.txt
 
