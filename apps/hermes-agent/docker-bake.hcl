@@ -8,7 +8,7 @@ variable "PYTHON_VERSION" {
 }
 
 variable "PYTHON_DIGEST" {
-  default = "sha256:82abc9f53600280b0757126f83c5a7d47088592d2acb6b4c0b9e97f76865508c"
+  default = "sha256:930e1abba7c4e8f96ed93e8012c35d174d7732752731bbd5e8e757d7ec6f3966"
 }
 
 variable "UPSTREAM_VERSION" {
