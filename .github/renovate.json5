@@ -10,7 +10,8 @@
   ],
   "dependencyDashboardTitle": "Renovate Dashboard",
   "assigneesFromCodeOwners": true,
-  "ignoreTests": true,
+  "automerge": true,
+  "automergeType": "branch",
   "customManagers": [
     {
       "customType": "regex",
@@ -90,8 +91,6 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["digest"],
-      "automerge": true,
-      "automergeType": "branch",
       "commitMessagePrefix": "chore(container): ",
       "commitMessageTopic": "{{depName}}",
       "commitMessageExtra": "( {{currentDigestShort}} → {{newDigestShort}} )"
