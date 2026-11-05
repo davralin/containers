@@ -6,7 +6,7 @@ A collection of personal container images, built with GitHub Actions for `linux/
 
 | Container | Description | Base Image | Status |
 |-----------|-------------|------------|--------|
-| `awx-ee` | AWX Execution Environment for Ansible | `quay.io/ansible/awx-ee` | ✅ |
+| `awx-ee` | AWX Execution Environment for Ansible | `registry.access.redhat.com/ubi10/ubi` | ✅ |
 | `beets` | Music tagger/organizer for continuous import in Kubernetes | `debian:slim` | ✅ |
 | `borgmatic` | Borgbackup automation wrapper | `debian:slim` | ✅ |
 | `huggingface-cli` | Download models from HuggingFace | `debian:slim` | ✅ |
@@ -56,7 +56,7 @@ cosign verify \
   ghcr.io/davralin/<name>@sha256:<digest>
 ```
 
-The release workflow reports Trivy findings to GitHub Security without blocking publication. A scheduled workflow scans each published app weekly with Trivy and Grype and uploads both SARIF reports.
+The release workflow reports filtered Trivy and Grype findings to GitHub Security without blocking publication. A scheduled workflow scans each published app weekly with Trivy and Grype and uploads both SARIF reports.
 
 Long-running services must define a meaningful container `HEALTHCHECK`. Execution environments and one-shot images must explicitly use `HEALTHCHECK NONE`.
 
