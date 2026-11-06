@@ -11,6 +11,10 @@ variable "DIGEST" {
   default = "sha256:9c6e381421d0f48d1b8133e573f33c185ee16cbf505eda9c4a8a4791b25ea8a6"
 }
 
+variable "IMAGE_VERSION" {
+  default = "${VERSION}"
+}
+
 variable "TAGS" {
   default = ""
 }
@@ -34,7 +38,7 @@ target "image" {
 
   labels = {
     "org.opencontainers.image.source"  = SOURCE
-    "org.opencontainers.image.version" = VERSION
+    "org.opencontainers.image.version" = IMAGE_VERSION
     "org.opencontainers.image.vendor"  = "davralin"
   }
 }
@@ -42,7 +46,7 @@ target "image" {
 target "image-local" {
   inherits = ["image"]
   output   = ["type=docker"]
-  tags     = TAGS == "" ? ["${APP}:${VERSION}"] : split(",", TAGS)
+  tags     = TAGS == "" ? ["${APP}:${IMAGE_VERSION}"] : split(",", TAGS)
 }
 
 target "image-all" {
