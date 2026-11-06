@@ -10,4 +10,4 @@ if [[ "${SKIP_BUILD:-}" != "1" ]]; then
   TAGS="$image" docker buildx bake image-local
 fi
 
-docker run --rm --entrypoint hf "$image" --help
+docker run --rm --entrypoint hf "$image" --version
