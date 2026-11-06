@@ -14,6 +14,24 @@
 - Squash/rebase before merging if intermediate commits aren't meaningful
 - PR title should follow the same conventional commit format
 
+## Architecture Decisions
+
+- Read the relevant records in `adr/` before changing durable image, build,
+  release, security, dependency, or runtime policy.
+- Add or update an ADR when changing a lasting repository default; supersede a
+  record instead of deleting history. Do not create ADRs for routine fixes or
+  dependency bumps.
+
+| ADR | Decision |
+| --- | --- |
+| `0001` | ADR governance |
+| `0002` | Per-app image build and test contract |
+| `0003` | Registry, tags, and digest deployment model |
+| `0004` | Renovate dependency management and automerge |
+| `0005` | Release attestation, signing, and security reporting |
+| `0006` | Container healthcheck semantics |
+| `0007` | AWX execution-environment architecture |
+
 ## Container Images
 
 - Base images are pinned by version and digest (e.g. `debian:13.4-slim@sha256:...`)

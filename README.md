@@ -58,8 +58,6 @@ cosign verify \
 
 The release workflow reports filtered Trivy and Grype findings to GitHub Security without blocking publication. A scheduled workflow scans each published app weekly with Trivy and Grype and uploads both SARIF reports.
 
-Long-running services must define a meaningful container `HEALTHCHECK`. Execution environments and one-shot images must explicitly use `HEALTHCHECK NONE`.
-
 ## License
 
 [GPL-3.0](LICENSE)
