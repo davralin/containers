@@ -31,3 +31,4 @@ additional_build_steps:
   append_final:
     # renovate: datasource=pypi depName=setuptools versioning=pep440
     - RUN $PYCMD -m pip install --no-cache-dir setuptools==84.2.1
+    - HEALTHCHECK NONE
