@@ -37,7 +37,7 @@ jobs:
         run: ./apps/${{ inputs.app }}/test.sh
       - name: Scan image with Trivy
         if: inputs.release
-        uses: aquasecurity/trivy-action@8f28faec26515256b6d22074d1d2a8986f4cbd87 # master
+        uses: aquasecurity/trivy-action@38b337fff0a2f984d5be173c99e3f633438167ec # master
         with:
           image-ref: local/${{ inputs.app }}:test
           scanners: vuln,secret
