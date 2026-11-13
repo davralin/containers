@@ -4,7 +4,7 @@ version: 3
 images:
   base_image:
     # renovate: datasource=docker depName=registry.access.redhat.com/ubi10/ubi versioning=loose
-    name: registry.access.redhat.com/ubi10/ubi:10.2-1793860810@sha256:0e8ccad7d35f5fd756f4f2202f018b8d3c3e8bb9af8e627d874239381a00ab41
+    name: registry.access.redhat.com/ubi10/ubi:10.3-1794519911@sha256:73ea54bfbfb586075bd3d45df6483a7f68875233c8cc7cebcf9b2bb42306c308
 
 dependencies:
   ansible_core:
