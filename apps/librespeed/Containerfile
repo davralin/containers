@@ -1,0 +1,33 @@
+ARG VERSION
+ARG DIGEST
+FROM ghcr.io/librespeed/speedtest:${VERSION}@${DIGEST} AS upstream
+
+# Reuse the upstream PHP/Apache runtime and source payload, but assemble the
+# standalone document root at build time instead of running its root entrypoint.
+FROM upstream
+
+ENV MODE=standalone \
+    WEBPORT=8080 \
+    APACHE_RUN_USER=#10001 \
+    APACHE_RUN_GROUP=#10001 \
+    APACHE_RUN_DIR=/tmp \
+    APACHE_PID_FILE=/tmp/apache2.pid \
+    APACHE_LOCK_DIR=/tmp \
+    APACHE_LOG_DIR=/tmp
+
+COPY --from=upstream /speedtest/backend/ /var/www/html/backend/
+COPY --from=upstream /speedtest/frontend/ /var/www/html/frontend/
+COPY --from=upstream /speedtest/images/ /var/www/html/images/
+COPY --from=upstream /speedtest/config.json /speedtest/design-switch.js /speedtest/favicon.ico /speedtest/index.html /speedtest/index-classic.html /speedtest/index-modern.html /speedtest/manifest.webmanifest /speedtest/settings.json /speedtest/speedtest.js /speedtest/speedtest_worker.js /speedtest/stability.html /speedtest/stability_worker.js /var/www/html/
+COPY server-list.json /var/www/html/server-list.json
+COPY apache-ports.conf /etc/apache2/ports.conf
+COPY apache-site.conf /etc/apache2/sites-available/000-default.conf
+COPY librespeed-php.ini /usr/local/etc/php/conf.d/99-librespeed-rootless.ini
+
+EXPOSE 8080
+STOPSIGNAL SIGWINCH
+USER 10001:10001
+ENTRYPOINT ["apache2-foreground"]
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl --fail --silent --show-error http://127.0.0.1:8080/ >/dev/null || exit 1

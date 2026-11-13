@@ -11,6 +11,7 @@ A collection of personal container images, built with GitHub Actions for `linux/
 | `borgmatic` | Borgbackup automation wrapper | `debian:slim` | ✅ |
 | `huggingface-cli` | Download models from HuggingFace | `debian:slim` | ✅ |
 | `isync` | IMAP mailbox sync (mbsync) | `debian:slim` | ✅ |
+| `librespeed` | Standalone LibreSpeed speed test with rootless Apache and immutable application files | `ghcr.io/librespeed/speedtest` | ✅ |
 | `mpd` | Music Player Daemon (internal radio station) | `debian:slim` | ✅ |
 | `nginx-autoindex` | Nginx with autoindex enabled, server_tokens disabled | `nginx:alpine-slim` | ✅ |
 | `ripbox` | yt-dlp + spotdl media downloader with support tools | `debian:slim` | ✅ |
