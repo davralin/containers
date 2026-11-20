@@ -4,11 +4,11 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/nginx versioning=semver
-  default = "1.31.8"
+  default = "1.31.9"
 }
 
 variable "DIGEST" {
-  default = "sha256:165ddde8751e75a1c907d24ef10d9f6deb08b57e0fe56caf67512486aff76d82"
+  default = "sha256:84f7876d21d154885f99554d7ae325d8c2213f9169726ea7ab60642f2573a787"
 }
 
 variable "TAGS" {
