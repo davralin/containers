@@ -13,7 +13,7 @@ variable "DIGEST" {
 
 variable "YT_DLP_VERSION" {
   // renovate: datasource=github-releases depName=yt-dlp/yt-dlp versioning=loose
-  default = "2026.10.26"
+  default = "2026.11.23"
 }
 
 variable "SPOTDL_VERSION" {
