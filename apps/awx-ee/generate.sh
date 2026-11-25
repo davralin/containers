@@ -4,7 +4,7 @@ set -euo pipefail
 app_dir="$(cd "$(dirname "$0")" && pwd)"
 context_dir="$app_dir/.build"
 # renovate: datasource=docker depName=docker.io/library/python versioning=docker
-builder_image="python:3.15-slim@sha256:65a65fc7b30b06cb6df4930fd4650697cb23f4c2698ab81fc87e4b031bc36928"
+builder_image="python:3.15-slim@sha256:63bb298d2b7b88f176f51b5189f54ce6535c997682ea70885d2132f5d473a8a5"
 
 rm -rf "$context_dir"
 
